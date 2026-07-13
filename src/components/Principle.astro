@@ -1,0 +1,5 @@
+---
+interface Props { label?: string; title: string; }
+const { label = 'Principle', title } = Astro.props;
+---
+<section class="block principle"><strong>{label}</strong><h2>{title}</h2><slot /></section>

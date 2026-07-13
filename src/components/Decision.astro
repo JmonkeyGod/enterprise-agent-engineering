@@ -1,0 +1,5 @@
+---
+interface Props { question: string; answer: string; alternative?: string; }
+const { question, answer, alternative = 'No added component.' } = Astro.props;
+---
+<section class="block"><h2>Design decision</h2><div class="decision"><div><h3>{question}</h3><p>{answer}</p></div><div><h3>What we did not add</h3><p>{alternative}</p></div></div></section>

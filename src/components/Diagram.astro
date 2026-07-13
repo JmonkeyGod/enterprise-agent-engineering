@@ -1,0 +1,12 @@
+---
+interface Props { title?: string; chart: string; }
+const { title, chart } = Astro.props;
+---
+<section class="block">
+  {title && <h2>{title}</h2>}
+  <div class="diagram"><pre class="mermaid">{chart}</pre></div>
+</section>
+<script>
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/+esm';
+  mermaid.initialize({ startOnLoad: true, theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'neutral', securityLevel: 'loose', flowchart: { curve: 'basis' } });
+</script>

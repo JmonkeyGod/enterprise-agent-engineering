@@ -1,0 +1,5 @@
+---
+interface Props { label?: string; title: string; }
+const { label = 'Enterprise Bid Agent', title } = Astro.props;
+---
+<section class="block"><div class="case"><div class="case-label">{label}</div><div><h2>{title}</h2><slot /></div></div></section>

@@ -1,0 +1,11 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`flowchart LR\n  W[Workflow] --> B[Business Service]\n  W --> A[Agent Runtime]\n  A --> T[Controlled Tools]\n  A --> H[Human Approval]\n  B --> D[(Database)]\n  T --> B\n  H --> B`;
+---
+<DocsLayout title="Conceptual Integrity" section="Concepts"><Hero eyebrow="Concept 01" title="Conceptual Integrity" lede="Complexity grows when responsibilities cross boundaries—not when the system has multiple components." reading="8 min" difficulty="Foundational" />
+<Question>Can every team describe the system with the same simple sentence?</Question>
+<Diagram title="One idea, clear boundaries" chart={chart} />
+<Principle title="Keep the business deterministic. Keep intelligence bounded."><p>Workflow owns process. Business services own transactions. Agent owns uncertain decisions. Human owns irreversible approval.</p></Principle>
+<CaseBlock title="The bid agent does not collect, save, approve, and push by itself."><p>Collection, normalization, deduplication, persistence, approval, and delivery remain deterministic. The agent performs one narrow decision: whether a notice deserves sales attention.</p></CaseBlock>
+<Decision question="Why not build one autonomous agent?" answer="Because one agent would mix reasoning, permissions, transactions, and delivery. That makes failures hard to isolate and impossible to explain." alternative="No planner swarm. No universal memory layer. No second orchestration framework." />
+<Takeaway>Do not add intelligence by breaking the system’s existing boundaries.</Takeaway></DocsLayout>

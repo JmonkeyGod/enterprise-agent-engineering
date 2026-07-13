@@ -1,0 +1,17 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`flowchart LR\n  I[Task] --> W[Workflow]\n  W --> Q{Semantic decision needed?}\n  Q -->|No| X[Execute]\n  Q -->|Yes| A[Agent decides]\n  A --> X\n  X --> H{High risk?}\n  H -->|Yes| P[Human approval]\n  H -->|No| F[Finish]\n  P --> F`;
+---
+<DocsLayout title="Decision & Execution" section="Concepts"><Hero eyebrow="Concept 02" title="Decision & Execution" lede="Intelligence begins where deterministic rules end. Execution begins where a decision becomes an accountable action." reading="10 min" difficulty="Foundational" prerequisite="Conceptual Integrity" />
+<Question>Which step needs judgment—and which step only needs reliable execution?</Question>
+<Diagram title="Put intelligence at the decision point" chart={chart} />
+<Principle title="Agent decides. Workflow executes."><p>Use models for open semantic judgment, missing-information planning, and tool choice. Use code for schedules, retries, idempotency, approval, persistence, and delivery.</p></Principle>
+<CaseBlock title="A notice moves through one intelligent gate."><p>The workflow collects and deduplicates notices. The agent scores relevance. The workflow routes low scores to archive and high scores to approval. A business service sends the approved message.</p>
+<div class="code-frame"><div class="code-head">task_router.py</div><pre><code>def choose_mode(task: Task) -> Mode:
+    if task.is_fixed_process:
+        return Mode.WORKFLOW
+    if task.needs_open_judgment:
+        return Mode.AGENT
+    return Mode.DIRECT_LLM</code></pre></div></CaseBlock>
+<Decision question="Why start with a rule-based router?" answer="It creates an explainable baseline. A model is added only when language variation becomes a measured limitation." alternative="No model-based router in v0.1. No multi-agent delegation." />
+<Takeaway>Use Agent for decision cost, not for code reduction.</Takeaway></DocsLayout>

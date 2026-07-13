@@ -1,0 +1,65 @@
+---
+import '../styles/global.css';
+interface Props {
+  title: string;
+  description?: string;
+  section?: string;
+}
+const { title, description = 'Enterprise Agent Engineering', section = '' } = Astro.props;
+const path = Astro.url.pathname;
+const base = import.meta.env.BASE_URL;
+const nav = [
+  ['Concepts', 'concepts/'],
+  ['Patterns', 'patterns/'],
+  ['Recipes', 'recipes/'],
+  ['Case Studies', 'case-studies/'],
+  ['Reference', 'reference/']
+];
+const href = (value: string) => `${base}${value}`.replace(/\/+/g, '/');
+---
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <title>{title} · Enterprise Agent Engineering</title>
+    <script is:inline>
+      const stored = localStorage.getItem('eae-theme');
+      if (stored) document.documentElement.dataset.theme = stored;
+      else if (matchMedia('(prefers-color-scheme: dark)').matches) document.documentElement.dataset.theme = 'dark';
+    </script>
+  </head>
+  <body>
+    <div class="site">
+      <aside class="sidebar">
+        <a class="brand" href={base}><strong>Enterprise Agent Engineering</strong><span>Powered by EADL</span></a>
+        <button class="search" type="button" aria-label="搜索占位，首版暂未启用">⌕ <span>Search</span></button>
+        <nav aria-label="主导航">
+          <div class="nav-group">
+            <div class="nav-label">Explore</div>
+            {nav.map(([label, url]) => <a class="nav-link" aria-current={path.includes(`/${url}`) ? 'page' : undefined} href={href(url)}>{label}</a>)}
+          </div>
+          <div class="nav-group">
+            <div class="nav-label">Start here</div>
+            <a class="nav-link" aria-current={path.endsWith('/conceptual-integrity/') ? 'page' : undefined} href={href('concepts/conceptual-integrity/')}>Conceptual Integrity</a>
+            <a class="nav-link" aria-current={path.endsWith('/decision-execution/') ? 'page' : undefined} href={href('concepts/decision-execution/')}>Decision & Execution</a>
+          </div>
+        </nav>
+        <div class="sidebar-actions"><button class="theme-button" id="theme-toggle" type="button">Light / Dark</button></div>
+      </aside>
+      <main class="main">
+        <div class="mobile-bar"><a href={base}>EAE</a><span>{section}</span></div>
+        <article class="content"><slot /></article>
+      </main>
+    </div>
+    <script is:inline>
+      document.getElementById('theme-toggle')?.addEventListener('click', () => {
+        const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem('eae-theme', next);
+        location.reload();
+      });
+    </script>
+  </body>
+</html>
