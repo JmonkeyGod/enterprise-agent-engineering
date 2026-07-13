@@ -2,38 +2,42 @@
 
 **Good agent systems are designed, not assembled.**
 
-A restrained Astro documentation product built on EADL — Enterprise Agent Design Language.
+This repository is the documentation platform for **Enterprise Agent Engineering**, powered by **EADL — Enterprise Agent Design Language**.
 
-## What is included
+## v0.2 scope
 
-- One-accent visual system with light and dark modes
-- Concepts / Patterns / Recipes / Case Studies / Reference information architecture
-- Seven content blocks only: Hero, Question, Diagram, Principle, Case, Decision, Takeaway
-- Two complete concept pages
+- EADL v1.0 vocabulary and manifesto
+- Six framework-independent concepts
+- Workflow + Agent and Human in Control patterns
+- LangGraph explicit-state recipe
+- Enterprise Bid Agent case study
+- Seven-component design-system constraint
+- One accent color, 8pt spacing, light/dark themes
 - GitHub Pages deployment workflow
 
 ## Run locally
 
 ```bash
 npm install
+npm run verify
 npm run dev
 ```
 
-Open the local URL printed by Astro.
-
-## Verify and build
+Production build:
 
 ```bash
-npm run verify
 npm run build
+npm run preview
 ```
 
-## GitHub Pages
+## Content model
 
-1. Replace `site` and, when necessary, `base` in `astro.config.mjs`.
-2. Push to the `main` branch.
-3. In GitHub repository settings, select **Pages → Source → GitHub Actions**.
+- **Concepts** — stable ideas
+- **Patterns** — reusable system structures
+- **Recipes** — technology-specific implementations
+- **Case Studies** — enterprise trade-offs in context
+- **Reference** — vocabulary, manifesto, and conventions
 
-## Design constraint
+## Design constraints
 
-Before adding a component, remove or reuse an existing one. Every new component must justify its existence.
+Every page is composed from exactly seven content blocks: Hero, Question, Diagram, Principle, Case, Decision, and Takeaway. New visual components require removing or consolidating an existing one first.

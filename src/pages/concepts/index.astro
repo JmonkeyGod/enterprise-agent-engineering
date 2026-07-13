@@ -1,9 +1,15 @@
 ---
-import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Takeaway from '../../components/Takeaway.astro';
 const base = import.meta.env.BASE_URL; const href=(v:string)=>`${base}${v}`.replace(/\/+/g,'/');
+const cards=[
+['Foundation','Conceptual Integrity','One system. One design language. Clear boundaries.','concepts/conceptual-integrity/'],
+['Boundary','Decision & Execution','Agent decides. Workflow executes.','concepts/decision-execution/'],
+['Lifecycle','Explicit State','Business progress must be visible and resumable.','concepts/state/'],
+['Context','Memory & Truth','Memory is context. Database is truth.','concepts/memory-truth/'],
+['Action','Tool as Capability','Expose business intent, not infrastructure.','concepts/tool-capability/'],
+['Trust','Evaluation & Trust','If it cannot be measured, it cannot be trusted.','concepts/evaluation-trust/']
+];
 ---
-<DocsLayout title="Concepts" section="Concepts"><Hero eyebrow="Stable ideas" title="Concepts" lede="Concepts describe what an enterprise agent system is. They remain useful even when frameworks change." />
-<section class="block"><div class="cards">
-<a class="card" href={href('concepts/conceptual-integrity/')}><small>Foundation</small><h3>Conceptual Integrity</h3><p>One system. One design language. Clear boundaries.</p></a>
-<a class="card" href={href('concepts/decision-execution/')}><small>Boundary</small><h3>Decision & Execution</h3><p>Agent decides. Workflow executes.</p></a>
-</div></section></DocsLayout>
+<DocsLayout title="Concepts" section="Concepts"><Hero eyebrow="Stable ideas" title="Concepts" lede="Framework-independent ideas that define what an enterprise agent system is and where its boundaries belong." />
+<section class="block"><div class="cards">{cards.map(([small,title,text,url])=><a class="card" href={href(url)}><small>{small}</small><h3>{title}</h3><p>{text}</p></a>)}</div></section>
+<Takeaway>Concepts change slowly. Recipes may change every release.</Takeaway></DocsLayout>

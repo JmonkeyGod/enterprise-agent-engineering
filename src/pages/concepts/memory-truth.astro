@@ -1,0 +1,17 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`flowchart LR
+  U[User preference] --> M[Memory]
+  Q[Current task] --> M
+  M --> A[Agent reasoning]
+  D[(Business database)] --> A
+  A --> R[Answer or action]
+  D -. source of truth .-> R`;
+---
+<DocsLayout title="Memory & Truth" section="Concepts"><Hero eyebrow="Concept 04" title="Memory is context. Database is truth." lede="Memory helps the model reason. It must never become the authoritative record of enterprise facts." reading="8 min" difficulty="Core" prerequisite="Explicit State" />
+<Question>Would the business accept this value if the model remembered it incorrectly?</Question>
+<Diagram title="Context and truth are different systems" chart={chart} />
+<Principle title="Remember preferences. Query facts."><p>Store stable user preferences and interaction context in memory. Retrieve notices, orders, balances, permissions, and approvals from authoritative systems.</p></Principle>
+<CaseBlock title="Remember what sales cares about—not what the notice says."><p>The agent may remember that a user follows Jiangsu cloud projects. The notice title, deadline, budget, and status always come from the bid database.</p></CaseBlock>
+<Decision question="Why not store all conversations in Redis and call it memory?" answer="Storage is not a memory design. Memory needs scope, write policy, expiry, correction, deletion, and sensitivity rules." alternative="No universal memory service in the first release." />
+<Takeaway>Memory may influence a decision. It must not redefine the facts.</Takeaway></DocsLayout>

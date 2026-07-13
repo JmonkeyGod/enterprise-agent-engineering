@@ -1,0 +1,24 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`flowchart LR
+  S[Typed State] --> C[Classify node]
+  C --> R{conditional edge}
+  R -->|archive| E[END]
+  R -->|analyze| A[Analyze node]
+  A --> I[Interrupt approval]
+  I --> X[Resume and execute]`;
+---
+<DocsLayout title="LangGraph for Explicit State" section="Recipes"><Hero eyebrow="Recipe 01" title="LangGraph for explicit state" lede="Use LangGraph when the process needs visible state, conditional routing, persistence, interruption, and recovery." reading="12 min" difficulty="Implementation" prerequisite="Explicit State" />
+<Question>Does the task need to pause and resume without reconstructing its progress from messages?</Question>
+<Diagram title="Map business states to graph states" chart={chart} />
+<Principle title="Model the business state before drawing the graph."><p>Nodes should implement focused transitions. The graph should reveal business flow rather than hide it behind a generic agent loop.</p></Principle>
+<CaseBlock title="A minimal approval graph"><div class="code-frame"><div class="code-head">graph.py</div><pre><code>class BidState(TypedDict):
+    notice_id: str
+    score: int | None
+    status: Literal["new", "analyzed", "waiting", "pushed"]
+
+graph.add_node("analyze", analyze_notice)
+graph.add_node("approve", request_approval)
+graph.add_conditional_edges("analyze", route_by_score)</code></pre></div><p>The code is intentionally incomplete: the recipe shows the design boundary, while production adapters, persistence, and policy remain separate modules.</p></CaseBlock>
+<Decision question="When should LangGraph not be used?" answer="Do not use it for a single model call, a fixed linear workflow, or a process already well served by an existing workflow engine." alternative="No parallel framework for the same orchestration problem." />
+<Takeaway>Use LangGraph to make state visible—not to make a simple task look agentic.</Takeaway></DocsLayout>

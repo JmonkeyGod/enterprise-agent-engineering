@@ -1,0 +1,20 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`flowchart LR
+  C[Scheduled collection] --> N[Normalize and deduplicate]
+  N --> R[Rule filter]
+  R --> A[Opportunity agent]
+  A --> K[Company knowledge]
+  A --> T[Controlled tools]
+  A --> H{Approval}
+  H -->|approve| F[Feishu table and group]
+  H -->|reject| E[Evaluation dataset]`;
+---
+<DocsLayout title="Enterprise Bid Agent" section="Case Studies"><Hero eyebrow="Case Study 01" title="Enterprise Bid Agent" lede="A restrained agent system that finds sales opportunities without turning collection, storage, approval, and delivery into model decisions." reading="15 min" difficulty="System" prerequisite="Workflow + Agent" />
+<Question>How can we reduce sales screening time without giving an agent uncontrolled access to enterprise systems?</Question>
+<Diagram title="The complete bounded architecture" chart={chart} />
+<Principle title="One agent. One decision. Many deterministic controls."><p>The opportunity agent decides relevance. Every other stage has a clear owner, contract, error policy, and audit trail.</p></Principle>
+<CaseBlock label="Business outcome" title="Measure adoption, not eloquence."><p>Success means fewer missed opportunities, fewer irrelevant pushes, shorter screening time, and higher sales follow-up—not longer explanations.</p></CaseBlock>
+<CaseBlock label="System boundary" title="Java remains the business plane."><p>Java services own identities, transactions, integration, and durable business data. Python owns extraction, semantic scoring, retrieval, and bounded planning.</p></CaseBlock>
+<Decision question="Why not begin with Multi-Agent?" answer="Collection, analysis, and delivery do not require independent conversational identities. Clear modules and permissions are enough." alternative="No researcher/writer/reviewer swarm. Add specialists only after measured context or permission boundaries require them." />
+<Takeaway>The best enterprise agent is often a small decision engine inside a well-designed system.</Takeaway></DocsLayout>

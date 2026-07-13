@@ -1,0 +1,16 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`flowchart LR
+  A[Agent] --> T[SearchBid capability]
+  T --> P[Policy and validation]
+  P --> R[REST / SDK / Database]
+  R --> O[Structured observation]
+  O --> A`;
+---
+<DocsLayout title="Tool as Capability" section="Concepts"><Hero eyebrow="Concept 05" title="Tool is capability." lede="An agent should understand what a business capability does—not the protocol details used to implement it." reading="8 min" difficulty="Core" prerequisite="Decision & Execution" />
+<Question>Can the tool change its internal API without changing the agent?</Question>
+<Diagram title="Hide transport behind capability" chart={chart} />
+<Principle title="Describe intent, validate action."><p>A good tool exposes a narrow business verb, typed input, explicit side effects, permission checks, and a concise observation.</p></Principle>
+<CaseBlock title="SearchBid is stable even when the portal changes."><p>The agent calls SearchBid. The adapter may use REST today and a vendor SDK tomorrow. The agent contract remains unchanged.</p></CaseBlock>
+<Decision question="Why not expose raw SQL or generic HTTP?" answer="Generic tools enlarge the attack surface and force the model to understand infrastructure rather than business intent." alternative="No shell tool. No arbitrary SQL. No generic write endpoint." />
+<Takeaway>A tool should reveal the business capability and hide the implementation.</Takeaway></DocsLayout>
