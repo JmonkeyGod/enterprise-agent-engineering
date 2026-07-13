@@ -1,4 +1,19 @@
 ---
-import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Takeaway from '../../components/Takeaway.astro';
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Principle from '../../components/Principle.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
 ---
-<DocsLayout title="reference" section="reference"><Hero eyebrow="EADL" title="reference" lede="This area is intentionally small in the design-system preview. It demonstrates the information architecture without inventing unfinished content." /><Takeaway>Structure first. Content follows only when it has earned its place.</Takeaway></DocsLayout>
+<DocsLayout title="EADL Reference" section="Reference"><Hero eyebrow="Enterprise Agent Design Language" title="EADL v1.0" lede="A small vocabulary for discussing enterprise agent systems without tying architecture to a framework." reading="12 min" difficulty="Reference" />
+<section class="block"><h2>Core vocabulary</h2><div class="cards">
+<div class="card"><small>01</small><h3>Decision</h3><p>An uncertain choice that requires semantic judgment.</p></div>
+<div class="card"><small>02</small><h3>Execution</h3><p>A controlled action with an accountable outcome.</p></div>
+<div class="card"><small>03</small><h3>State</h3><p>Visible progress, lifecycle, ownership, and recovery position.</p></div>
+<div class="card"><small>04</small><h3>Memory</h3><p>Context retained to improve future reasoning.</p></div>
+<div class="card"><small>05</small><h3>Knowledge</h3><p>Evidence retrieved from governed sources.</p></div>
+<div class="card"><small>06</small><h3>Tool</h3><p>A bounded business capability available to an agent.</p></div>
+<div class="card"><small>07</small><h3>Evaluation</h3><p>Repeatable evidence of quality, cost, latency, and safety.</p></div>
+<div class="card"><small>08</small><h3>Safety</h3><p>Permissions, policy, validation, approval, and audit.</p></div>
+<div class="card"><small>09</small><h3>Evolution</h3><p>Improvement through measurement, simplification, and controlled change.</p></div>
+</div></section>
+<Principle label="Manifesto" title="Remove before add."><p>Every new agent, graph, memory store, protocol, database, or framework must explain the complexity it removes.</p></Principle>
+<section class="block"><h2>Information architecture</h2><p><strong>Concepts</strong> define stable ideas. <strong>Patterns</strong> combine them into reusable structures. <strong>Recipes</strong> implement them with current technology. <strong>Case Studies</strong> expose enterprise trade-offs. <strong>Reference</strong> freezes vocabulary and conventions.</p></section>
+<Decision question="What is a Design Decision Record?" answer="A concise record of the question, chosen answer, rejected alternative, constraints, and evidence that would trigger reconsideration." alternative="No long architecture essay when one explicit decision is enough." />
+<Takeaway>Shared language is the first layer of conceptual integrity.</Takeaway></DocsLayout>

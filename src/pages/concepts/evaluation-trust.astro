@@ -1,0 +1,17 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`flowchart LR
+  D[Golden dataset] --> S[System under test]
+  S --> T[Trace and outputs]
+  T --> E[Deterministic checks]
+  T --> J[Model judge]
+  E --> G[Release gate]
+  J --> G`;
+---
+<DocsLayout title="Evaluation & Trust" section="Concepts"><Hero eyebrow="Concept 06" title="If it cannot be measured, it cannot be trusted." lede="A convincing demo is not evidence. Enterprise trust comes from repeatable evaluation and observable behavior." reading="10 min" difficulty="Core" prerequisite="Explicit State" />
+<Question>What evidence proves that a prompt, model, or tool change made the system better?</Question>
+<Diagram title="Trust is built from repeatable evidence" chart={chart} />
+<Principle title="Measure components and outcomes."><p>Evaluate extraction, retrieval, tool selection, final task success, latency, cost, and safety separately before combining them into one release decision.</p></Principle>
+<CaseBlock title="A bid agent is judged by business errors."><p>The important metrics are missed high-value notices, false pushes, field accuracy, approval adoption, latency, and cost—not how fluent the explanation sounds.</p></CaseBlock>
+<Decision question="Why not rely only on an LLM judge?" answer="A model judge is useful for semantic quality but must be calibrated against deterministic rules and human-reviewed examples." alternative="No single aggregate score that hides failure modes." />
+<Takeaway>Trust is not a feeling. It is a test suite, a trace, and a release gate.</Takeaway></DocsLayout>

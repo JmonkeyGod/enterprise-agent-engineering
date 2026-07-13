@@ -44,6 +44,9 @@ const href = (value: string) => `${base}${value}`.replace(/\/+/g, '/');
             <div class="nav-label">Start here</div>
             <a class="nav-link" aria-current={path.endsWith('/conceptual-integrity/') ? 'page' : undefined} href={href('concepts/conceptual-integrity/')}>Conceptual Integrity</a>
             <a class="nav-link" aria-current={path.endsWith('/decision-execution/') ? 'page' : undefined} href={href('concepts/decision-execution/')}>Decision & Execution</a>
+            <a class="nav-link" aria-current={path.endsWith('/state/') ? 'page' : undefined} href={href('concepts/state/')}>Explicit State</a>
+            <a class="nav-link" aria-current={path.endsWith('/memory-truth/') ? 'page' : undefined} href={href('concepts/memory-truth/')}>Memory & Truth</a>
+            <a class="nav-link" aria-current={path.endsWith('/workflow-agent/') ? 'page' : undefined} href={href('patterns/workflow-agent/')}>Workflow + Agent</a>
           </div>
         </nav>
         <div class="sidebar-actions"><button class="theme-button" id="theme-toggle" type="button">Light / Dark</button></div>

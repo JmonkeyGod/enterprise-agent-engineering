@@ -1,0 +1,17 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`stateDiagram-v2
+  [*] --> NEW
+  NEW --> ANALYZING
+  ANALYZING --> WAIT_APPROVAL: high value
+  ANALYZING --> ARCHIVED: low value
+  WAIT_APPROVAL --> PUSHED: approved
+  WAIT_APPROVAL --> REJECTED: rejected`;
+---
+<DocsLayout title="Explicit State" section="Concepts"><Hero eyebrow="Concept 03" title="State must be visible." lede="If a task can pause, retry, recover, or wait for approval, its state cannot live only inside a prompt." reading="9 min" difficulty="Core" prerequisite="Decision & Execution" />
+<Question>Can the system explain where a task is, why it stopped, and what happens next?</Question>
+<Diagram title="State is a business fact" chart={chart} />
+<Principle title="Prompt carries context. State carries progress."><p>Model context helps reasoning. Explicit state records lifecycle, ownership, retries, approvals, and terminal outcomes.</p></Principle>
+<CaseBlock title="Every bid notice has one visible lifecycle."><p>A notice moves from NEW to ANALYZING, then to ARCHIVED or WAIT_APPROVAL. Approval produces PUSHED or REJECTED. Operations teams can inspect the state without reading model messages.</p></CaseBlock>
+<Decision question="Why not infer state from chat history?" answer="Chat history is ambiguous, expensive to replay, and difficult to migrate. State needs typed fields and explicit transitions." alternative="No hidden status in prompts. No second workflow engine inside the agent." />
+<Takeaway>If state matters to the business, make it explicit.</Takeaway></DocsLayout>

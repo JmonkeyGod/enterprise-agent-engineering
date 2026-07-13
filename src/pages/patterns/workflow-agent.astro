@@ -1,0 +1,18 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`flowchart LR
+  T[Trigger] --> C[Collect]
+  C --> N[Normalize]
+  N --> A[Agent decision]
+  A --> R{Route}
+  R -->|low| S[Save]
+  R -->|high| H[Approval]
+  H --> P[Push]`;
+---
+<DocsLayout title="Workflow + Agent" section="Patterns"><Hero eyebrow="Pattern 01" title="Workflow + Agent" lede="Use a deterministic process as the system skeleton and place intelligence only at uncertain decision points." reading="10 min" difficulty="Foundational" prerequisite="Decision & Execution" />
+<Question>Where is uncertainty high enough to justify a model?</Question>
+<Diagram title="One intelligent gate inside a reliable process" chart={chart} />
+<Principle title="The workflow owns sequence. The agent owns judgment."><p>This pattern limits autonomy, simplifies testing, and preserves existing business controls.</p></Principle>
+<CaseBlock title="Only relevance scoring is intelligent."><p>Collection, normalization, deduplication, routing, approval, and delivery remain deterministic. The agent evaluates whether a notice deserves attention.</p></CaseBlock>
+<Decision question="Why not let the agent orchestrate every step?" answer="Most steps are already known. Giving them to a model adds cost and uncertainty without adding useful intelligence." alternative="No planner for fixed steps. No autonomous retry strategy." />
+<Takeaway>Place intelligence at the narrowest point where rules stop being enough.</Takeaway></DocsLayout>

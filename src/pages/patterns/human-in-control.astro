@@ -1,0 +1,16 @@
+---
+import DocsLayout from '../../layouts/DocsLayout.astro'; import Hero from '../../components/Hero.astro'; import Question from '../../components/Question.astro'; import Diagram from '../../components/Diagram.astro'; import Principle from '../../components/Principle.astro'; import CaseBlock from '../../components/CaseBlock.astro'; import Decision from '../../components/Decision.astro'; import Takeaway from '../../components/Takeaway.astro';
+const chart=`flowchart LR
+  A[Agent proposes] --> P[Preview impact]
+  P --> H{Authorized human}
+  H -->|approve| X[Business service executes]
+  H -->|reject| F[Feedback recorded]
+  X --> O[Audit event]`;
+---
+<DocsLayout title="Human in Control" section="Patterns"><Hero eyebrow="Pattern 02" title="Human in Control" lede="High-risk actions become trustworthy when the system pauses, explains impact, and resumes from an explicit decision." reading="9 min" difficulty="Core" prerequisite="Explicit State" />
+<Question>What action would be unacceptable if the model were confidently wrong?</Question>
+<Diagram title="Proposal and execution are separate" chart={chart} />
+<Principle title="The agent proposes. The authorized system executes."><p>Approval must include the exact action, target, impact, evidence, and a resumable state—not a vague yes/no chat message.</p></Principle>
+<CaseBlock title="Sales sees the message before customers do."><p>The bid agent creates a push preview with score, evidence, recipients, and source. An authorized reviewer approves or rejects it. The business service performs the send exactly once.</p></CaseBlock>
+<Decision question="Why not approve every tool call?" answer="Approval should be risk-based. Requiring humans for harmless reads creates fatigue and weakens attention where it matters." alternative="No approval for read-only search. No silent approval for external writes." />
+<Takeaway>Human control is a designed state transition, not a disclaimer.</Takeaway></DocsLayout>
